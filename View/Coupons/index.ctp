@@ -1,5 +1,5 @@
 <div class="coupons index">
-	<h2><?php __('Coupons');?></h2>
+	<h2><?php echo __('Coupons');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -12,7 +12,7 @@
 			<th><?php echo $this->Paginator->sort('user_id');?></th>
 			<th><?php echo $this->Paginator->sort('is_active');?></th>
 			<th><?php echo $this->Paginator->sort('redeem_date');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -56,7 +56,7 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php __('Actions'); ?></h3>
+	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Coupon', true), array('action' => 'add')); ?></li>
 	</ul>

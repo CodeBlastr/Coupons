@@ -1,7 +1,7 @@
 <div class="coupons form">
 <?php echo $this->Form->create('Coupon');?>
 	<fieldset>
-		<legend><?php __('Add Coupon'); ?></legend>
+		<legend><?php echo __('Add Coupon'); ?></legend>
 	<?php
 		echo $this->Form->input('amount');
 		echo $this->Form->input('start_date');
@@ -14,7 +14,7 @@
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
 <div class="actions">
-	<h3><?php __('Actions'); ?></h3>
+	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Coupons', true), array('action' => 'index'));?></li>

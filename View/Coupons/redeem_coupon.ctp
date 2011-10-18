@@ -1,7 +1,7 @@
 <div class="redeemCoupons form">
 <?php echo $this->Form->create('Coupon');?>
 	<fieldset>
-		<legend><?php __('Redeem Coupon'); ?></legend>
+		<legend><?php echo __('Redeem Coupon'); ?></legend>
 	<?php
 		echo $this->Form->input('code');
 	?>
