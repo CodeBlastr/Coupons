@@ -70,21 +70,21 @@ class Coupon extends CouponsAppModel {
 		if(!empty($couponData)){
 			try{
 				//Prepares data for Coupon
-				$this->data['Coupon']['id'] = $couponData['Coupon']['id'];
-				$this->data['Coupon']['user_id'] = $userId;
-				$this->data['Coupon']['is_active'] = 0;
-				$this->data['Coupon']['redeem_date'] = date('Y:m:d H:i:s');
+				$this->request->data['Coupon']['id'] = $couponData['Coupon']['id'];
+				$this->request->data['Coupon']['user_id'] = $userId;
+				$this->request->data['Coupon']['is_active'] = 0;
+				$this->request->data['Coupon']['redeem_date'] = date('Y:m:d H:i:s');
 				$couponValue = $couponData['Coupon']['value'];
-				if(!($this->save($this->data))){
+				if(!($this->save($this->request->data))){
 					throw new Exception(__d('Coupon Data not Saved', true));
 				} else {
 					$this->updateUserCredits($couponValue, $userId);
 				}
 			} catch(Exception $e){
-				$this->data['Coupon']['user_id'] = NULL;
-				$this->data['Coupon']['is_active'] = 1;
-				$this->data['Coupon']['redeem_date'] = NULL;
-				$this->save($this->data);
+				$this->request->data['Coupon']['user_id'] = NULL;
+				$this->request->data['Coupon']['is_active'] = 1;
+				$this->request->data['Coupon']['redeem_date'] = NULL;
+				$this->save($this->request->data);
 				$status = false;
 			}
 		} else {
@@ -109,12 +109,12 @@ class Coupon extends CouponsAppModel {
 							'Coupon.start_date <= NOW()', 'Coupon.end_date >= NOW()' , 'is_active' => 1)));
 		if(!empty($couponData)){
 			//Prepares data for Coupon
-			$this->data['Coupon']['id'] = $couponData['Coupon']['id'];
-			$this->data['Coupon']['user_id'] = $userId;
-			$this->data['Coupon']['is_active'] = 0;
-			$this->data['Coupon']['redeem_date'] = date('Y:m:d H:i:s');
+			$this->request->data['Coupon']['id'] = $couponData['Coupon']['id'];
+			$this->request->data['Coupon']['user_id'] = $userId;
+			$this->request->data['Coupon']['is_active'] = 0;
+			$this->request->data['Coupon']['redeem_date'] = date('Y:m:d H:i:s');
 			$couponValue = $couponData['Coupon']['value'];
-			if($this->save($this->data)){  // this was reversed from the one above
+			if($this->save($this->request->data)){  // this was reversed from the one above
 				try {
 					$this->updateUserCredits($couponValue, $userId);
 					return true;

@@ -19,8 +19,8 @@ class CouponsController extends CouponsAppController {
 
 	
 	function add() {
-		if (!empty($this->data)) {
-			if($this->Coupon->generateCoupon($this->data)){
+		if (!empty($this->request->data)) {
+			if($this->Coupon->generateCoupon($this->request->data)){
 				$this->Session->setFlash(__('The coupon has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -33,8 +33,8 @@ class CouponsController extends CouponsAppController {
 	 * adds coupon value to user credits
 	 */
 	function redeem_coupon(){
-		if(!empty($this->data)){
-			if($this->Coupon->redeemCoupon($this->Auth->user('id'), $this->data)){
+		if(!empty($this->request->data)){
+			if($this->Coupon->redeemCoupon($this->Auth->user('id'), $this->request->data)){
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The coupon cannot be redeemed', true));
@@ -43,24 +43,24 @@ class CouponsController extends CouponsAppController {
 	}
 
 	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid coupon', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if($this->data['Coupon']['is_active'] == 1){
-				$this->data['Coupon']['redeem_date'] = NULL;
-				$this->data['Coupon']['user_id'] = NULL;
+		if (!empty($this->request->data)) {
+			if($this->request->data['Coupon']['is_active'] == 1){
+				$this->request->data['Coupon']['redeem_date'] = NULL;
+				$this->request->data['Coupon']['user_id'] = NULL;
 			}
-			if ($this->Coupon->save($this->data)) {
+			if ($this->Coupon->save($this->request->data)) {
 				$this->Session->setFlash(__('The coupon has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The coupon could not be saved. Please, try again.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Coupon->read(null, $id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->Coupon->read(null, $id);
 		}
 	}
 
