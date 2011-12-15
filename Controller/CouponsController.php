@@ -1,7 +1,8 @@
 <?php
 class CouponsController extends CouponsAppController {
 
-	var $name = 'Coupons';
+	public $name = 'Coupons';
+	public $uses = 'Coupons.Coupon';
 
 	function index() {
 		$this->Coupon->recursive = 1;
