@@ -1,4 +1,8 @@
 <?php
+/**
+ * @todo			Move this entire thing to the credits plugin.  Instead of a coupon to redeem credits we would just have a credit entry in the database where the is_claimed field is not checked.   This entire coupon plugin needs to be deleted. 
+ * @todo			We need a code and a pin number (not just a code).  That will allow us to have hard tangible gift cards with a code, but you'd also need a pin to redeem it. 
+ */
 class Coupon extends CouponsAppModel {
 	var $name = 'Coupon';
 	var $belongsTo = array(
@@ -7,11 +11,11 @@ class Coupon extends CouponsAppModel {
 		)
 	);
 	
-	/* generateCoupon
-	 * Generates Coupon and makes a new entry to database to Coupon
-	 * @param array data
-	 * return boolean
-	 */
+/* generateCoupon
+ * Generates Coupon and makes a new entry to database to Coupon
+ * @param array data
+ * return boolean
+ */
 	function generateCoupon($data = null){
 		$code =  $this->generateRandomCode();
 		// Checks if coupon with same code already exists
@@ -27,10 +31,10 @@ class Coupon extends CouponsAppModel {
 		}
 	}
 	
-	/* generateRandomCode
-	 * Generates a random Code of length 5
-	 * return code
-	 */
+/* generateRandomCode
+ * Generates a random Code of length 5
+ * return code
+ */
 	function generateRandomCode() {
 	    $length = 8;
 	    $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -41,11 +45,11 @@ class Coupon extends CouponsAppModel {
 		return $code;
 	}
 	
-	/* checkCodeExists
-	 * Check whether code with same string exists
-	 * @param code
-	 * return boolean
-	 */
+/* checkCodeExists
+ * Check whether code with same string exists
+ * @param code
+ * return boolean
+ */
 	function ifCodeExists($code = null){
 		$code = $this->find('first', array('conditions' => array('Coupon.code' => $code)));
 		if(!empty($code)){
@@ -55,11 +59,11 @@ class Coupon extends CouponsAppModel {
 		}
 	}
 	
-	/* redeemCoupon
-	 * check if user tries to redeem valid code
-	 * @param array data
-	 * return boolean
-	 */
+/* redeemCoupon
+ * check if user tries to redeem valid code
+ * @param array data
+ * return boolean
+ */
 	function redeemCoupon($userId = null, $data = null){
 		$status = true;
 		$code = $data['Coupon']['code'];
@@ -137,11 +141,11 @@ class Coupon extends CouponsAppModel {
 
 
 
-	/*	updateUserCredits
-	 * 	update user credits based on coupon value
-	 *  @param array data
-	 *  return boolean
-	 */
+/*	updateUserCredits
+ * 	update user credits based on coupon value
+ *  @param array data
+ *  return boolean
+ */
 	function updateUserCredits($credits = null, $userId){
 		$creditData = $this->User->find('first' , array('conditions' => 
 												array('User.id' => $userId)

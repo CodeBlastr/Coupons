@@ -30,10 +30,10 @@ class CouponsController extends CouponsAppController {
 		}
 	}
 
-	/* redeem_coupon
-	 * adds coupon value to user credits
-	 */
-	function redeem_coupon(){
+/* redeem_coupon
+ * adds coupon value to user credits
+ */
+	function redeem(){
 		if(!empty($this->request->data)){
 			if($this->Coupon->redeemCoupon($this->Auth->user('id'), $this->request->data)){
 				$this->redirect(array('action' => 'index'));
