@@ -2,4 +2,3 @@
 class CouponsAppController extends AppController {
 	
 }
-?>

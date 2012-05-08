@@ -4,13 +4,13 @@ class CouponsController extends CouponsAppController {
 	public $name = 'Coupons';
 	public $uses = 'Coupons.Coupon';
 
-	function index() {
+	public function index() {
 		$this->Coupon->recursive = 1;
 		$this->set('coupons', $this->paginate());
 		
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid coupon', true));
 			$this->redirect(array('action' => 'index'));
@@ -19,7 +19,7 @@ class CouponsController extends CouponsAppController {
 	}
 
 	
-	function add() {
+	public function add() {
 		if (!empty($this->request->data)) {
 			if($this->Coupon->generateCoupon($this->request->data)){
 				$this->Session->setFlash(__('The coupon has been saved', true));
@@ -33,7 +33,7 @@ class CouponsController extends CouponsAppController {
 /* redeem_coupon
  * adds coupon value to user credits
  */
-	function redeem(){
+	public function redeem(){
 		if(!empty($this->request->data)){
 			if($this->Coupon->redeemCoupon($this->Auth->user('id'), $this->request->data)){
 				$this->redirect(array('action' => 'index'));
@@ -43,7 +43,7 @@ class CouponsController extends CouponsAppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid coupon', true));
 			$this->redirect(array('action' => 'index'));
@@ -65,7 +65,7 @@ class CouponsController extends CouponsAppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for coupon', true));
 			$this->redirect(array('action'=>'index'));
